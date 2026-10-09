@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Detector</title>
+</head>
+
+<body>
+
+    <h1>Emotion Detector</h1>
+
+    <input
+        type="text"
+        id="textToAnalyze"
+        placeholder="Enter your text"
+    >
+
+    <button onclick="runEmotionDetection()">
+        Analyze
+    </button>
+
+    <p id="system_response"></p>
+
+    <script>
+        async function runEmotionDetection() {
+            const text = document.getElementById("textToAnalyze").value;
+
+            const response = await fetch(
+                `/emotionDetector?textToAnalyze=${encodeURIComponent(text)}`
+            );
+
+            const result = await response.text();
+
+            document.getElementById("system_response").innerText = result;
+        }
+    </script>
+
+</body>
+</html>
